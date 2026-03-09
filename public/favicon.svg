@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <radialGradient id="heatGlow" cx="50%" cy="85%" r="60%">
+      <stop offset="0%" stop-color="#ff5733" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ff5733" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#161930"/>
+      <stop offset="100%" stop-color="#07080f"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="url(#bgGrad)"/>
+
+  <!-- Heat glow -->
+  <ellipse cx="16" cy="27" rx="14" ry="8" fill="url(#heatGlow)"/>
+
+  <!-- City skyline (simplified silhouette) -->
+  <!-- Tall center tower -->
+  <rect x="13" y="10" width="6" height="17" rx="0.5" fill="#ff5733"/>
+  <!-- Antenna on center -->
+  <rect x="15.5" y="6" width="1" height="5" fill="#ff5733"/>
+
+  <!-- Left building -->
+  <rect x="5" y="15" width="5" height="12" rx="0.5" fill="#f97316"/>
+  <!-- Left short -->
+  <rect x="2" y="19" width="4" height="8" rx="0.5" fill="#eab308" fill-opacity="0.8"/>
+
+  <!-- Right building -->
+  <rect x="22" y="14" width="5" height="13" rx="0.5" fill="#f97316"/>
+  <!-- Right short -->
+  <rect x="26" y="18" width="4" height="9" rx="0.5" fill="#eab308" fill-opacity="0.8"/>
+
+  <!-- Heat waves (wavy lines above skyline) -->
+  <path d="M9 8 Q10.5 6 12 8" stroke="#ff5733" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <path d="M14 5 Q15.5 3 17 5" stroke="#ff5733" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M19 7 Q20.5 5 22 7" stroke="#f97316" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+  <!-- Ground line -->
+  <rect x="2" y="27" width="28" height="1.5" rx="0.75" fill="#ff5733" fill-opacity="0.5"/>
+</svg>

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+/* ─── Shadcn design tokens ─────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ─── Shadcn CSS variables (dark by default) ───────────────────── */
+:root {
+  --background: #07080f;
+  --foreground: #e4e8ff;
+  --card: #111426;
+  --card-foreground: #e4e8ff;
+  --popover: #1a1e35;
+  --popover-foreground: #e4e8ff;
+  --primary: #ff5733;
+  --primary-foreground: #ffffff;
+  --secondary: #161930;
+  --secondary-foreground: #e4e8ff;
+  --muted: #161930;
+  --muted-foreground: #7a82b0;
+  --accent: #1a1e35;
+  --accent-foreground: #e4e8ff;
+  --destructive: #ef4444;
+  --border: #1e2340;
+  --input: #1e2340;
+  --ring: #ff5733;
+  --radius: 0.625rem;
+}
+
+/* ─── App custom tokens ─────────────────────────────────────────── */
+@theme {
+  --color-bg-base:       #07080f;
+  --color-bg-panel:      #0d0f1c;
+  --color-bg-card:       #111426;
+  --color-bg-elevated:   #1a1e35;
+  --color-divider:       #1e2340;
+  --color-divider-bright:#2a2f56;
+
+  --color-text-primary:  #e4e8ff;
+  --color-text-secondary:#7a82b0;
+  --color-text-muted:    #454d7a;
+
+  --color-urban:         #ff5733;
+  --color-urban-glow:    rgba(255, 87, 51, 0.35);
+  --color-inner:         #f97316;
+  --color-inner-glow:    rgba(249, 115, 22, 0.3);
+  --color-outer:         #eab308;
+  --color-outer-glow:    rgba(234, 179, 8, 0.25);
+  --color-rural:         #00d4ff;
+  --color-rural-glow:    rgba(0, 212, 255, 0.3);
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb { background: var(--color-divider-bright); border-radius: 2px; }
+
+/* ─── MapLibre overrides ────────────────────────────────────────── */
+.maplibregl-ctrl-attrib,
+.maplibregl-ctrl-logo { display: none !important; }
+
+.maplibregl-popup-content {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-divider-bright) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 12px !important;
+  box-shadow: 0 0 24px rgba(0,0,0,0.7) !important;
+  min-width: 140px !important;
+}
+.maplibregl-popup-tip { border-top-color: var(--color-divider-bright) !important; }
+.maplibregl-popup-close-button { color: var(--color-text-secondary) !important; font-size: 16px !important; }
+
+/* ─── Animations ────────────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50%       { opacity: 0.65; filter: brightness(1.3); }
+}
+@keyframes float-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
+.animate-float-in   { animation: float-in 0.4s ease-out both; }
+.animate-slide-in   { animation: slide-in 0.35s ease-out both; }
