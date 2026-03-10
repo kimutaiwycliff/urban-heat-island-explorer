@@ -1,4 +1,4 @@
-import { AlertCircle, Flame, Activity } from 'lucide-react'
+import { AlertCircle, Flame, Activity, X } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Card, CardContent } from '@/components/ui/card'
 import CitySelector from './CitySelector'
@@ -10,18 +10,21 @@ import HourlyHeatmap from '../Charts/HourlyHeatmap'
 import { useAppStore } from '@/store/useAppStore'
 import { useZoneWeather } from '@/hooks/useZoneWeather'
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const selectedCity = useAppStore(s => s.selectedCity)
   const { zoneData, isLoading, isError, delta } = useZoneWeather(selectedCity)
 
   return (
     <aside
-      className="flex flex-col h-full overflow-hidden"
+      className={`
+        fixed inset-y-0 left-0 z-20 flex flex-col w-full overflow-hidden
+        transition-transform duration-300 ease-in-out
+        md:relative md:h-full md:w-[340px] md:flex-shrink-0 md:translate-x-0
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}
       style={{
         background: 'var(--color-bg-panel)',
         borderRight: '1px solid var(--color-divider)',
-        width: 340,
-        flexShrink: 0,
       }}
     >
       {/* Header */}
@@ -52,7 +55,18 @@ export default function Sidebar() {
               </p>
             </div>
           </div>
-          <UnitToggle />
+          <div className="flex items-center gap-2">
+            <UnitToggle />
+            {/* Mobile close button */}
+            <button
+              onClick={onClose}
+              className="md:hidden flex items-center justify-center rounded-lg p-1.5 transition-colors"
+              style={{ color: 'var(--color-text-secondary)', background: 'var(--color-bg-elevated)' }}
+              aria-label="Close panel"
+            >
+              <X size={16} />
+            </button>
+          </div>
         </div>
         <CitySelector />
       </div>
