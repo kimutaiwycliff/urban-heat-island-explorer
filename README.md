@@ -1,16 +1,38 @@
-# React + Vite
+# Urban Heat Island Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Compares live air temperature in a city centre with points progressively further out (inner suburb, outer suburb, rural) to show the urban heat island effect for 25 cities.
 
-Currently, two official plugins are available:
+**Live:** https://urban-heat-island-explorer.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Urban Heat Island Explorer](docs/screenshot.png)
 
-## React Compiler
+## What it shows
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Current conditions for four sample points per city, fetched in parallel from Open-Meteo
+- The UHI delta: urban core temperature minus the rural reference
+- A 7-day hourly temperature history per zone and an hour-by-day heat grid
+- °C / °F toggle and a city search
 
-## Expanding the ESLint configuration
+## How it works
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Sample points are offset diagonally from the city centre by 0, 0.05°, 0.15° and 0.30°. This is a simple approximation; it does not use land-cover data, so some "rural" points can land on water or another town.
+- Open-Meteo is a modelled product (roughly 1–11 km grid depending on region), so the deltas are indicative and smaller than what station or satellite land-surface temperature would show.
+- State lives in a small Zustand store; requests are cached with TanStack Query.
+
+## Stack
+
+React · Vite · MapLibre GL (react-map-gl) · Recharts · Zustand · TanStack Query · Tailwind CSS · shadcn/ui
+
+## Run locally
+
+```bash
+bun install   # or npm install
+bun run dev
+```
+
+No API key is needed.
+
+## Ideas for improvement
+
+- Place the reference points using land-cover data (ESA WorldCover) instead of fixed offsets
+- Add MODIS / Landsat land-surface temperature as a raster layer for comparison
